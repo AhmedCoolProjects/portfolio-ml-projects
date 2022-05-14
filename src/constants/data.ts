@@ -1,4 +1,4 @@
-import { ProjectProps } from "../../types";
+import { ProjectProps, ProjectVersionsData } from "../../types";
 import { Images } from "./images";
 
 export const projectsData: ProjectProps[] = [
@@ -29,8 +29,7 @@ export const projectsData: ProjectProps[] = [
     title: "Fake News Detection",
     description: "",
     image: Images.fake_news_detection,
-    // link: "/ml/fake_news_detection",
-    link: "",
+    link: "/ml/fake_news_detection",
   },
   {
     title: "Color Detection",
@@ -80,5 +79,15 @@ export const projectsData: ProjectProps[] = [
     image: Images.handwriting_chars_recognition,
     // link: "/ml/handwriting_chars_recognition",
     link: "",
+  },
+];
+
+export const FakeNewsDetectionVersionsData: ProjectVersionsData[] = [
+  {
+    version: "1.0.0",
+    description:
+      "This version is based on a Passive Aggressive Classifier and TfidfVectorizer.",
+    link: "https://blog.ahmedbargady.me/blog/2022/fake-news-detection",
+    title: "Fake News Detection",
   },
 ];

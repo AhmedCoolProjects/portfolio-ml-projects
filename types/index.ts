@@ -22,3 +22,10 @@ export type PageHeaderProps = {
   title: string;
   image: StaticImageData;
 };
+
+export type ProjectVersionsData = {
+  version: string;
+  link: string;
+  title: string;
+  description: string;
+};
