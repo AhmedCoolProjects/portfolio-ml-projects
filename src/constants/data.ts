@@ -15,8 +15,7 @@ export const projectsData: ProjectProps[] = [
     description:
       "A web application that understand the handwritten digits and recognize the digits.",
     image: Images.handwriting_digits_recognition,
-    // link: "/ml/handwriting_digits_recognition",
-    link: "",
+    link: "/ml/handwriting_digits_recognition",
   },
   {
     title: "Stock Price Prediction",
