@@ -18,6 +18,13 @@ export const projectsData: ProjectProps[] = [
     link: "/ml/handwriting_digits_recognition",
   },
   {
+    title: "Loan Prediction",
+    description:
+      "Easily predict the loan status of a customer basing on a machine learning model with an accuracy of 82.99%",
+    image: Images.loan_prediction,
+    link: "/ml/loan_prediction",
+  },
+  {
     title: "Stock Price Prediction",
     description: "",
     image: Images.stock_price_prediction,

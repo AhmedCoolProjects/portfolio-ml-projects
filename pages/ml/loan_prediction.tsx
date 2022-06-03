@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { PageHeader } from "../../src/components";
+import { PageHeader, SmallDialog } from "../../src/components";
 import { Images } from "../../src/constants";
 import { axios2 } from "../../src/axios/http-commun";
 import { useState } from "react";
@@ -32,6 +32,10 @@ const Cartoonifying: NextPage = () => {
     loan_pred: "",
     loan_proba: "",
   });
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
   const runPredictionFct = () => {
     axios2
       .post("/loan_prediction", {
@@ -40,6 +44,7 @@ const Cartoonifying: NextPage = () => {
       .then((res) => {
         console.log(res.data);
         setResult(res.data);
+        setOpenDialog(true);
       })
       .catch((err) => {
         console.log(err);
@@ -48,11 +53,11 @@ const Cartoonifying: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Stock Price Prediction | Jina ML</title>
+        <title>Loan Prediction | Jina ML</title>
       </Head>
       <div>
         <PageHeader
-          image={Images.stock_price_prediction}
+          image={Images.loan_prediction}
           title="Jina Loan Prediction V-1.0"
         />
         <div className="flex space-y-4 flex-col items-center justify-center">
@@ -61,6 +66,10 @@ const Cartoonifying: NextPage = () => {
             elevation={3}
             className="space-y-3 p-4 flex flex-col items-center w-full"
           >
+            <h1 className="text-2xl font-bold text-center mb-3">
+              Fill this form and submit it to get the prediction of your loan
+              status!
+            </h1>
             <FormControl fullWidth>
               <InputLabel id="gender_label">Gender</InputLabel>
               <Select
@@ -210,26 +219,46 @@ const Cartoonifying: NextPage = () => {
             </FormControl>
           </Paper>
           {/* Submit */}
-          <Button onClick={runPredictionFct} variant="outlined">
+          <Button
+            disabled={
+              !data.ApplicantIncome ||
+              !data.CoapplicantIncome ||
+              !data.LoanAmount ||
+              !data.Loan_Amount_Term ||
+              !data.Credit_History ||
+              !data.Property_Area
+            }
+            onClick={runPredictionFct}
+            variant="outlined"
+          >
             Predict Loan
           </Button>
           {/* Result */}
-          {result.loan_pred ? (
-            <Paper elevation={3} className="p-4">
-              <h1>
-                Loan Status:
-                <span className="ml-3 font-semibold text-base">
-                  {result.loan_pred}
+          <SmallDialog
+            onClose={handleCloseDialog}
+            open={openDialog}
+            title="Prediction Result"
+            description="You get here two values: the Prediction for your loan status and the Probability of this prediction by our ML model"
+          >
+            <>
+              <div className="flex flex-row items-center">
+                <p className="w-1/2">Loan Status:</p>
+                <span
+                  className={`ml-3 font-semibold text-xl ${
+                    result.loan_pred == "1" ? "text-green-500" : "text-red-500"
+                  }`}
+                >
+                  {result.loan_pred == "1" ? "Approved" : "Rejected"}
                 </span>
-              </h1>
-              <h1>
-                With Probability:
-                <span className="ml-3 font-semibold text-base">
+              </div>
+              <div className="flex flex-row items-center">
+                <p className="w-1/2">With Probability:</p>
+                <span className="ml-3 font-semibold text-xl">
                   {result.loan_proba}
                 </span>
-              </h1>
-            </Paper>
-          ) : null}
+              </div>
+            </>
+          </SmallDialog>
         </div>
       </div>
     </div>

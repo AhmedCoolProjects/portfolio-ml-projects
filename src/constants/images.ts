@@ -9,6 +9,7 @@ import traffic_sign from "../assets/images/traffic_sign.svg";
 import speech_emotion from "../assets/images/speech_emotion.svg";
 import breast_cancer from "../assets/images/breast_cancer.svg";
 import handwriting_chars_recognition from "../assets/images/handwriting_chars_recognition.svg";
+import loan_prediction from "../assets/images/loan-prediction.png";
 
 export const Images = {
   image_cartoonifying,
@@ -22,4 +23,5 @@ export const Images = {
   speech_emotion,
   breast_cancer,
   handwriting_chars_recognition,
+  loan_prediction,
 };
